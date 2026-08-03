@@ -26,7 +26,7 @@
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             text-align: center;
         }
@@ -43,6 +43,44 @@
             font-size: 1.1em;
         }
 
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Game Screen */
         .stats {
             background: #f8f9fa;
             border-radius: 15px;
@@ -81,6 +119,7 @@
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
             margin: 30px auto;
             display: block;
+            position: relative;
         }
 
         .click-button:hover {
@@ -90,6 +129,25 @@
 
         .click-button:active {
             transform: scale(0.95);
+        }
+
+        .click-feedback {
+            position: absolute;
+            pointer-events: none;
+            font-weight: bold;
+            font-size: 1.5em;
+            animation: floatUp 1.5s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-60px) scale(1.5);
+            }
         }
 
         .upgrades {
@@ -103,17 +161,21 @@
             text-align: center;
         }
 
+        .upgrade-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
         .upgrade-btn {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 15px;
             border: 2px solid #667eea;
             background: white;
             color: #667eea;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1em;
+            font-size: 0.95em;
             transition: all 0.3s ease;
         }
 
@@ -128,27 +190,174 @@
             cursor: not-allowed;
         }
 
+        .upgrade-name {
+            display: block;
+            margin-bottom: 5px;
+        }
+
         .upgrade-cost {
             display: block;
             font-size: 0.85em;
             margin-top: 3px;
         }
 
-        .reset-btn {
+        .upgrade-effect {
+            display: block;
+            font-size: 0.8em;
+            color: #764ba2;
+            margin-top: 2px;
+        }
+
+        /* Statistics Screen */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #667eea;
+            text-align: left;
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stat-card p {
+            color: #666;
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .stat-card .value {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Settings Screen */
+        .settings-option {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-option h3 {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #ccc;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.on {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s;
+        }
+
+        .toggle-switch.on .toggle-slider {
+            left: 24px;
+        }
+
+        .danger-btn {
             width: 100%;
-            padding: 10px;
-            margin-top: 20px;
+            padding: 15px;
             background: #dc3545;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1em;
             transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
-        .reset-btn:hover {
+        .danger-btn:hover {
             background: #c82333;
+        }
+
+        /* Collector Items */
+        .items-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .item-btn {
+            padding: 20px;
+            border: 2px solid #667eea;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .item-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .item-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .item-icon {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+
+        .item-name {
+            display: block;
+            color: #667eea;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .item-cost {
+            display: block;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .item-owned {
+            display: block;
+            font-size: 0.8em;
+            color: #764ba2;
+            margin-top: 3px;
         }
     </style>
 </head>
@@ -157,42 +366,174 @@
         <h1>✨ Aura Farmer</h1>
         <p class="subtitle">Click to collect Aura!</p>
 
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-label">Aura:</span>
-                <span class="stat-value" id="score">0</span>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="switchScreen('game')">Game</button>
+            <button class="nav-btn" onclick="switchScreen('collectors')">Collectors</button>
+            <button class="nav-btn" onclick="switchScreen('stats')">Statistics</button>
+            <button class="nav-btn" onclick="switchScreen('settings')">Settings</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game" class="screen active">
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Aura:</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Per Click:</span>
+                    <span class="stat-value" id="perClick">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Auto Per Sec:</span>
+                    <span class="stat-value" id="perSecond">0</span>
+                </div>
             </div>
-            <div class="stat">
-                <span class="stat-label">Per Click:</span>
-                <span class="stat-value" id="perClick">1</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Auto Per Sec:</span>
-                <span class="stat-value" id="perSecond">0</span>
+
+            <button class="click-button" onclick="click()">💎</button>
+
+            <div class="upgrades">
+                <h2>Power Upgrades</h2>
+                <div class="upgrade-grid">
+                    <button class="upgrade-btn" onclick="buyUpgrade(0)" id="upgrade0">
+                        <span class="upgrade-name">Double Power</span>
+                        <span class="upgrade-effect">+1 Click</span>
+                        <span class="upgrade-cost" id="cost0">Cost: 10</span>
+                    </button>
+                    <button class="upgrade-btn" onclick="buyUpgrade(1)" id="upgrade1">
+                        <span class="upgrade-name">Auto Clicker</span>
+                        <span class="upgrade-effect">+1 Per Sec</span>
+                        <span class="upgrade-cost" id="cost1">Cost: 50</span>
+                    </button>
+                    <button class="upgrade-btn" onclick="buyUpgrade(2)" id="upgrade2">
+                        <span class="upgrade-name">Power Boost</span>
+                        <span class="upgrade-effect">+5 Click</span>
+                        <span class="upgrade-cost" id="cost2">Cost: 100</span>
+                    </button>
+                    <button class="upgrade-btn" onclick="buyUpgrade(3)" id="upgrade3">
+                        <span class="upgrade-name">Aura Multiplier</span>
+                        <span class="upgrade-effect">×1.5 All</span>
+                        <span class="upgrade-cost" id="cost3">Cost: 250</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <button class="click-button" onclick="click()">💎</button>
+        <!-- Collectors Screen -->
+        <div id="collectors" class="screen">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Own Collectors</h2>
+            <div class="items-grid">
+                <button class="item-btn" onclick="buyCollector(0)" id="collector0">
+                    <div class="item-icon">67</div>
+                    <span class="item-name">Normal 67</span>
+                    <span class="item-cost" id="collectorCost0">Cost: 100</span>
+                    <span class="item-owned" id="collectorOwned0">Owned: 0</span>
+                </button>
+                <button class="item-btn" onclick="buyCollector(1)" id="collector1">
+                    <div class="item-icon">💎</div>
+                    <span class="item-name">Gold Diamond</span>
+                    <span class="item-cost" id="collectorCost1">Cost: 500</span>
+                    <span class="item-owned" id="collectorOwned1">Owned: 0</span>
+                </button>
+                <button class="item-btn" onclick="buyCollector(2)" id="collector2">
+                    <div class="item-icon">🌈</div>
+                    <span class="item-name">Rainbow 67</span>
+                    <span class="item-cost" id="collectorCost2">Cost: 1500</span>
+                    <span class="item-owned" id="collectorOwned2">Owned: 0</span>
+                </button>
+                <button class="item-btn" onclick="buyCollector(3)" id="collector3">
+                    <div class="item-icon">👑</div>
+                    <span class="item-name">Royal Master</span>
+                    <span class="item-cost" id="collectorCost3">Cost: 5000</span>
+                    <span class="item-owned" id="collectorOwned3">Owned: 0</span>
+                </button>
+                <button class="item-btn" onclick="buyCollector(4)" id="collector4">
+                    <div class="item-icon">⭐</div>
+                    <span class="item-name">Cosmic Star</span>
+                    <span class="item-cost" id="collectorCost4">Cost: 15000</span>
+                    <span class="item-owned" id="collectorOwned4">Owned: 0</span>
+                </button>
+                <button class="item-btn" onclick="buyCollector(5)" id="collector5">
+                    <div class="item-icon">🌟</div>
+                    <span class="item-name">Divine Aura</span>
+                    <span class="item-cost" id="collectorCost5">Cost: 50000</span>
+                    <span class="item-owned" id="collectorOwned5">Owned: 0</span>
+                </button>
+            </div>
+        </div>
 
-        <div class="upgrades">
-            <h2>Upgrades</h2>
-            <button class="upgrade-btn" onclick="buyUpgrade(0)" id="upgrade0">
-                Double Click Power
-                <span class="upgrade-cost" id="cost0">Cost: 10</span>
-            </button>
-            <button class="upgrade-btn" onclick="buyUpgrade(1)" id="upgrade1">
-                Auto Clicker
-                <span class="upgrade-cost" id="cost1">Cost: 50</span>
-            </button>
-            <button class="upgrade-btn" onclick="buyUpgrade(2)" id="upgrade2">
-                Power Boost
-                <span class="upgrade-cost" id="cost2">Cost: 100</span>
-            </button>
-            <button class="upgrade-btn" onclick="buyUpgrade(3)" id="upgrade3">
-                Aura Multiplier
-                <span class="upgrade-cost" id="cost3">Cost: 250</span>
-            </button>
-            <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+        <!-- Statistics Screen -->
+        <div id="stats" class="screen">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Game Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Aura Collected</h3>
+                    <p class="value" id="totalAuraCollected">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Clicks</h3>
+                    <p class="value" id="totalClicks">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Current Aura</h3>
+                    <p class="value" id="currentAura">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Aura Per Second</h3>
+                    <p class="value" id="auraPerSec">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Upgrades Bought</h3>
+                    <p class="value" id="totalUpgrades">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Collectors Owned</h3>
+                    <p class="value" id="totalCollectors">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Aura Per Click</h3>
+                    <p class="value" id="avgAuraPerClick">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Session Time</h3>
+                    <p class="value" id="sessionTime">0s</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings" class="screen">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Settings</h2>
+            
+            <div class="settings-option">
+                <h3>Click Feedback Effects</h3>
+                <div class="toggle-switch on" onclick="toggleSetting('clickFeedback')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <div class="settings-option">
+                <h3>Sound Effects</h3>
+                <div class="toggle-switch on" onclick="toggleSetting('soundEffects')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <div class="settings-option">
+                <h3>Auto-Save Progress</h3>
+                <div class="toggle-switch on" onclick="toggleSetting('autoSave')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <div class="settings-option">
+                <h3>Dark Mode</h3>
+                <div class="toggle-switch" onclick="toggleSetting('darkMode')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <button class="danger-btn" onclick="resetGame()">Reset All Progress</button>
         </div>
     </div>
 
@@ -201,6 +542,9 @@
         let perClick = 1;
         let autoClickRate = 0;
         let multiplier = 1;
+        let totalClicksCount = 0;
+        let totalAuraEarned = 0;
+        let sessionStartTime = Date.now();
 
         const upgrades = [
             { cost: 10, effect: () => { perClick += 1; } },
@@ -209,12 +553,57 @@
             { cost: 250, effect: () => { multiplier += 0.5; } }
         ];
 
+        const collectors = [
+            { name: "Normal 67", cost: 100, basePerSec: 1 },
+            { name: "Gold Diamond", cost: 500, basePerSec: 5 },
+            { name: "Rainbow 67", cost: 1500, basePerSec: 15 },
+            { name: "Royal Master", cost: 5000, basePerSec: 50 },
+            { name: "Cosmic Star", cost: 15000, basePerSec: 150 },
+            { name: "Divine Aura", cost: 50000, basePerSec: 500 }
+        ];
+
         const upgradeCosts = [10, 50, 100, 250];
         let purchased = [0, 0, 0, 0];
+        let collectorOwned = [0, 0, 0, 0, 0, 0];
+
+        let settings = {
+            clickFeedback: true,
+            soundEffects: true,
+            autoSave: true,
+            darkMode: false
+        };
+
+        function switchScreen(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(screenName).classList.add('active');
+            event.target.classList.add('active');
+        }
 
         function click() {
-            score += perClick * multiplier;
+            const gain = perClick * multiplier;
+            score += gain;
+            totalClicksCount++;
+            totalAuraEarned += gain;
+
+            if (settings.clickFeedback) {
+                showClickFeedback(gain);
+            }
+
             updateDisplay();
+        }
+
+        function showClickFeedback(amount) {
+            const button = document.querySelector('.click-button');
+            const feedback = document.createElement('div');
+            feedback.className = 'click-feedback';
+            feedback.textContent = '+' + amount.toFixed(0);
+            feedback.style.left = '50%';
+            feedback.style.top = '50%';
+            feedback.style.color = '#667eea';
+            feedback.style.transform = 'translateX(-50%)';
+            button.appendChild(feedback);
+            setTimeout(() => feedback.remove(), 1500);
         }
 
         function buyUpgrade(index) {
@@ -223,6 +612,20 @@
                 score -= cost;
                 upgrades[index].effect();
                 purchased[index]++;
+                updateDisplay();
+            } else {
+                alert('Not enough Aura!');
+            }
+        }
+
+        function buyCollector(index) {
+            const collector = collectors[index];
+            let cost = collector.cost * Math.pow(1.2, collectorOwned[index]);
+            
+            if (score >= cost) {
+                score -= cost;
+                collectorOwned[index]++;
+                autoClickRate += collector.basePerSec;
                 updateDisplay();
             } else {
                 alert('Not enough Aura!');
@@ -243,16 +646,57 @@
                 costSpan.textContent = `Cost: ${Math.floor(cost)}`;
                 btn.disabled = score < cost;
             }
+
+            // Update collector buttons
+            for (let i = 0; i < collectors.length; i++) {
+                const cost = collectors[i].cost * Math.pow(1.2, collectorOwned[i]);
+                const btn = document.getElementById(`collector${i}`);
+                const costSpan = document.getElementById(`collectorCost${i}`);
+                const ownedSpan = document.getElementById(`collectorOwned${i}`);
+                
+                costSpan.textContent = `Cost: ${Math.floor(cost)}`;
+                ownedSpan.textContent = `Owned: ${collectorOwned[i]}`;
+                btn.disabled = score < cost;
+            }
+
+            // Update statistics
+            document.getElementById('totalAuraCollected').textContent = Math.floor(totalAuraEarned);
+            document.getElementById('totalClicks').textContent = totalClicksCount;
+            document.getElementById('currentAura').textContent = Math.floor(score);
+            document.getElementById('auraPerSec').textContent = (autoClickRate * multiplier).toFixed(1);
+            document.getElementById('totalUpgrades').textContent = purchased.reduce((a, b) => a + b, 0);
+            document.getElementById('totalCollectors').textContent = collectorOwned.reduce((a, b) => a + b, 0);
+            document.getElementById('avgAuraPerClick').textContent = (totalClicksCount > 0 ? (totalAuraEarned / totalClicksCount).toFixed(2) : 0);
+            
+            const sessionTime = Math.floor((Date.now() - sessionStartTime) / 1000);
+            const minutes = Math.floor(sessionTime / 60);
+            const seconds = sessionTime % 60;
+            document.getElementById('sessionTime').textContent = `${minutes}m ${seconds}s`;
+        }
+
+        function toggleSetting(setting) {
+            settings[setting] = !settings[setting];
+            const toggles = document.querySelectorAll('.toggle-switch');
+            const settingKeys = Object.keys(settings);
+            const index = settingKeys.indexOf(setting);
+            if (index >= 0) {
+                toggles[index].classList.toggle('on');
+            }
         }
 
         function resetGame() {
-            if (confirm('Are you sure you want to reset your progress?')) {
+            if (confirm('Are you sure you want to reset ALL your progress? This cannot be undone!')) {
                 score = 0;
                 perClick = 1;
                 autoClickRate = 0;
                 multiplier = 1;
+                totalClicksCount = 0;
+                totalAuraEarned = 0;
                 purchased = [0, 0, 0, 0];
+                collectorOwned = [0, 0, 0, 0, 0, 0];
+                sessionStartTime = Date.now();
                 updateDisplay();
+                switchScreen('game');
             }
         }
 
@@ -260,6 +704,7 @@
         setInterval(() => {
             if (autoClickRate > 0) {
                 score += autoClickRate * multiplier;
+                totalAuraEarned += autoClickRate * multiplier;
                 updateDisplay();
             }
         }, 1000);
