@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Farmer Clicker Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .stats {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 2px solid #667eea;
+        }
+
+        .stat {
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .stat-value {
+            color: #667eea;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .click-button {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            margin: 30px auto;
+            display: block;
+        }
+
+        .click-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .click-button:active {
+            transform: scale(0.95);
+        }
+
+        .upgrades {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .upgrades h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .upgrade-btn {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .upgrade-btn:hover:not(:disabled) {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .upgrade-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .upgrade-cost {
+            display: block;
+            font-size: 0.85em;
+            margin-top: 3px;
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Aura Farmer</h1>
+        <p class="subtitle">Click to collect Aura!</p>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">Aura:</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Per Click:</span>
+                <span class="stat-value" id="perClick">1</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Auto Per Sec:</span>
+                <span class="stat-value" id="perSecond">0</span>
+            </div>
+        </div>
+
+        <button class="click-button" onclick="click()">💎</button>
+
+        <div class="upgrades">
+            <h2>Upgrades</h2>
+            <button class="upgrade-btn" onclick="buyUpgrade(0)" id="upgrade0">
+                Double Click Power
+                <span class="upgrade-cost" id="cost0">Cost: 10</span>
+            </button>
+            <button class="upgrade-btn" onclick="buyUpgrade(1)" id="upgrade1">
+                Auto Clicker
+                <span class="upgrade-cost" id="cost1">Cost: 50</span>
+            </button>
+            <button class="upgrade-btn" onclick="buyUpgrade(2)" id="upgrade2">
+                Power Boost
+                <span class="upgrade-cost" id="cost2">Cost: 100</span>
+            </button>
+            <button class="upgrade-btn" onclick="buyUpgrade(3)" id="upgrade3">
+                Aura Multiplier
+                <span class="upgrade-cost" id="cost3">Cost: 250</span>
+            </button>
+            <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let perClick = 1;
+        let autoClickRate = 0;
+        let multiplier = 1;
+
+        const upgrades = [
+            { cost: 10, effect: () => { perClick += 1; } },
+            { cost: 50, effect: () => { autoClickRate += 1; } },
+            { cost: 100, effect: () => { perClick += 5; } },
+            { cost: 250, effect: () => { multiplier += 0.5; } }
+        ];
+
+        const upgradeCosts = [10, 50, 100, 250];
+        let purchased = [0, 0, 0, 0];
+
+        function click() {
+            score += perClick * multiplier;
+            updateDisplay();
+        }
+
+        function buyUpgrade(index) {
+            const cost = upgradeCosts[index] * Math.pow(1.15, purchased[index]);
+            if (score >= cost) {
+                score -= cost;
+                upgrades[index].effect();
+                purchased[index]++;
+                updateDisplay();
+            } else {
+                alert('Not enough Aura!');
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').textContent = Math.floor(score);
+            document.getElementById('perClick').textContent = (perClick * multiplier).toFixed(1);
+            document.getElementById('perSecond').textContent = (autoClickRate * multiplier).toFixed(1);
+
+            // Update upgrade buttons
+            for (let i = 0; i < upgrades.length; i++) {
+                const cost = upgradeCosts[i] * Math.pow(1.15, purchased[i]);
+                const btn = document.getElementById(`upgrade${i}`);
+                const costSpan = document.getElementById(`cost${i}`);
+                
+                costSpan.textContent = `Cost: ${Math.floor(cost)}`;
+                btn.disabled = score < cost;
+            }
+        }
+
+        function resetGame() {
+            if (confirm('Are you sure you want to reset your progress?')) {
+                score = 0;
+                perClick = 1;
+                autoClickRate = 0;
+                multiplier = 1;
+                purchased = [0, 0, 0, 0];
+                updateDisplay();
+            }
+        }
+
+        // Auto clicker
+        setInterval(() => {
+            if (autoClickRate > 0) {
+                score += autoClickRate * multiplier;
+                updateDisplay();
+            }
+        }, 1000);
+
+        // Initial display
+        updateDisplay();
+    </script>
+</body>
+</html>
