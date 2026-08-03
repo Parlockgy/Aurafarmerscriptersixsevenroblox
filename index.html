@@ -367,10 +367,10 @@
         <p class="subtitle">Click to collect Aura!</p>
 
         <div class="nav-buttons">
-            <button class="nav-btn active" onclick="switchScreen('game')">Game</button>
-            <button class="nav-btn" onclick="switchScreen('collectors')">Collectors</button>
-            <button class="nav-btn" onclick="switchScreen('stats')">Statistics</button>
-            <button class="nav-btn" onclick="switchScreen('settings')">Settings</button>
+            <button class="nav-btn active" onclick="switchScreen('game', this)">Game</button>
+            <button class="nav-btn" onclick="switchScreen('collectors', this)">Collectors</button>
+            <button class="nav-btn" onclick="switchScreen('stats', this)">Statistics</button>
+            <button class="nav-btn" onclick="switchScreen('settings', this)">Settings</button>
         </div>
 
         <!-- Game Screen -->
@@ -573,11 +573,11 @@
             darkMode: false
         };
 
-        function switchScreen(screenName) {
+        function switchScreen(screenName, button) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(screenName).classList.add('active');
-            event.target.classList.add('active');
+            button.classList.add('active');
         }
 
         function click() {
@@ -696,7 +696,7 @@
                 collectorOwned = [0, 0, 0, 0, 0, 0];
                 sessionStartTime = Date.now();
                 updateDisplay();
-                switchScreen('game');
+                switchScreen('game', document.querySelector('.nav-btn'));
             }
         }
 
